@@ -20,5 +20,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        button = findViewById(R.id.button);
+        editText = findViewById(R.id.eText);
+
+        button.setOnClickListener(v -> {
+            Intent runCalc = new Intent("com.freecalc");
+            ActivityInfo activityInfo =
+                    runCalc.resolveActivityInfo(getPackageManager(),
+                            runCalc.getFlags());
+            if (activityInfo != null) {
+                runCalc.putExtra(CALC_DATA, editText.getText().toString());
+                startActivity(runCalc);
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        R.string.not_program, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
     }
 }
